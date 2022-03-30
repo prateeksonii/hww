@@ -1,34 +1,31 @@
 {
-  "name": "hww",
-  "version": "1.0.0",
+  "name": "remix-template-vercel-ts",
+  "private": true,
   "description": "",
-  "main": "index.js",
+  "license": "",
+  "sideEffects": false,
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "build": "remix build",
+    "dev": "remix dev",
+    "postinstall": "remix setup node"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/prateeksonii/hww.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/prateeksonii/hww/issues"
-  },
-  "homepage": "https://github.com/prateeksonii/hww#readme",
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3",
-    "helmet": "^5.0.2",
-    "morgan": "^1.10.0"
+    "@remix-run/react": "^1.3.3",
+    "@remix-run/vercel": "^1.3.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "remix": "^1.3.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "@remix-run/dev": "^1.3.3",
+    "@remix-run/eslint-config": "^1.3.3",
+    "@remix-run/serve": "^1.3.3",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "eslint": "^8.11.0",
+    "typescript": "^4.5.5"
   },
-  "nodemonConfig": {
-    "ignore": ["**/jobs.json"]
+  "engines": {
+    "node": ">=14"
   }
 }
