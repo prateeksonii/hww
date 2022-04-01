@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Job {
+  id        Int       @id @default(autoincrement())
+  name      String
+  url       String
+  cities    City[]
+  countries Country[]
+  remote    Boolean
+  process   String?
+  keywords  Keyword[]
+}
+
+model City {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  jobs Job[]
+}
+
+model Country {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  jobs Job[]
+}
+
+model Keyword {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  jobs Job[]
+}

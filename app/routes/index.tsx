@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { Link } from "remix";
 
 const IndexPage: FC = () => {
   return (
@@ -32,9 +33,12 @@ const IndexPage: FC = () => {
             <button className="text-lg px-6 py-2 rounded-md border-white border-2 font-medium hover:bg-white hover:text-black transition-all">
               Learn more
             </button>
-            <button className="text-lg px-6 py-2 rounded-md border-primary text-primary border-2 font-bold hover:bg-primary hover:text-black transition-all">
+            <Link
+              to="/jobs"
+              className="text-lg px-6 py-2 rounded-md border-primary text-primary border-2 font-bold hover:bg-primary hover:text-black transition-all"
+            >
               View jobs
-            </button>
+            </Link>
           </div>
         </div>
       </div>
