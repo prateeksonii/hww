@@ -50,7 +50,7 @@ function getJobs() {
           name: country.trim(),
         })) || [],
       remote: job["Remote OK?"]?.toLowerCase() === "checked" || false,
-      process: job.Process,
+      process: job.Process ?? "No process description provided",
       keywords:
         job.Keywords?.split(",").map((keyword) => ({
           name: keyword.trim(),
