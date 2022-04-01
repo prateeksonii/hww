@@ -1,5 +1,5 @@
 import { Job } from "@prisma/client";
-import { Link, LoaderFunction, useLoaderData, useNavigate } from "remix";
+import { LoaderFunction, useLoaderData, useNavigate } from "remix";
 import { db } from "~/utils/db.server";
 import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 
@@ -38,6 +38,7 @@ export default function JobsIndex() {
             <div
               key={job.id}
               className="shadow-2xl p-8 rounded-xl flex flex-col cursor-pointer"
+              onClick={() => navigate(`/job/view/${job.id}`)}
             >
               <div className="text-2xl font-bold">{job.name}</div>
               <div className="mt-4 text-lg text-ellipsis overflow-clip flex-1">
