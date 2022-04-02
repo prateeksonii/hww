@@ -2,36 +2,28 @@ import { Job } from "@prisma/client";
 import { LoaderFunction, useLoaderData, useNavigate } from "remix";
 import { db } from "~/utils/db.server";
 import { HiCheckCircle, HiXCircle } from "react-icons/hi";
+import Pagination from "~/components/Pagination";
 
 export const loader: LoaderFunction = async ({ params }) => {
   const page = params.page ? +params.page : 1;
+  const count = await db.job.count();
   const jobs = await db.job.findMany({ take: 10, skip: (page - 1) * 10 });
 
-  return { jobs, page };
+  return { jobs, page, count };
 };
 
 export default function JobsIndex() {
   const navigate = useNavigate();
 
-  const { jobs, page } = useLoaderData() as { jobs: Job[]; page: number };
+  const { jobs, page, count } = useLoaderData() as {
+    jobs: Job[];
+    page: number;
+    count: number;
+  };
 
   return (
     <div className="mt-8">
-      <div className="flex gap-4 items-center justify-end mb-8">
-        <button
-          disabled={page === 1}
-          className="w-max px-6 py-3 text-lg bg-primary text-black font-bold rounded disabled:bg-gray-400"
-          onClick={() => navigate(`/jobs/${page - 1}`)}
-        >
-          Previous
-        </button>
-        <button
-          className="w-max px-6 py-3 text-lg bg-primary text-black font-bold rounded disabled:bg-gray-400"
-          onClick={() => navigate(`/jobs/${page + 1}`)}
-        >
-          Next
-        </button>
-      </div>
+      <Pagination count={count} page={page} />
       <div className="grid grid-cols-2 gap-16">
         {jobs.map((job) => {
           return (
@@ -56,21 +48,7 @@ export default function JobsIndex() {
           );
         })}
       </div>
-      <div className="flex gap-4 items-center justify-end mt-8">
-        <button
-          disabled={page === 1}
-          className="w-max px-6 py-3 text-lg bg-primary text-black font-bold rounded disabled:bg-gray-400"
-          onClick={() => navigate(`/jobs/${page - 1}`)}
-        >
-          Previous
-        </button>
-        <button
-          className="w-max px-6 py-3 text-lg bg-primary text-black font-bold rounded disabled:bg-gray-400"
-          onClick={() => navigate(`/jobs/${page + 1}`)}
-        >
-          Next
-        </button>
-      </div>
+      <Pagination count={count} page={page} />
     </div>
   );
 }
